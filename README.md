@@ -27,27 +27,29 @@ Ensure you have the following components installed:
 3. Copy the ROS2_PX4_Offboard_Example into your workspace and prepare your configuration.
 
 ## Running the System
+
 After setting up the environment, you can start the system by running the following commands. This will launch several processes:
 
-processes.py in a new window
-MicroDDS in a new terminal window
-Gazebo in a second tab in the same terminal window
-Gazebo GUI in its own window
-control.py in a new window
-RViz in a new window
-## Drone Controls
+- **processes.py** in a new window
+- **MicroDDS** in a new terminal window
+- **Gazebo** in a second tab in the same terminal window
+- **Gazebo GUI** in its own window
+- **control.py** in a new window
+- **RViz** in a new window
+
+### Drone Controls
+
 Use the following commands to control the drone:
 
-W: Up
-S: Down
-A: Yaw Left
-D: Yaw Right
-Up Arrow: Pitch Forward
-Down Arrow: Pitch Backward
-Left Arrow: Roll Left
-Right Arrow: Roll Right
-Space: Arm/Disarm
-Pressing the space bar will arm the drone, and after a moment, it will take off and switch to offboard mode. You can now control it using the above keys. If you land the drone, it will disarm, and you'll need to toggle the arm switch off and back on with the space bar to take off again.
+- **W**: Up
+- **S**: Down
+- **A**: Yaw Left
+- **D**: Yaw Right
+- **Up Arrow**: Pitch Forward
+- **Down Arrow**: Pitch Backward
+- **Left Arrow**: Roll Left
+- **Right Arrow**: Roll Right
+- **Space**: Arm/Disarm
 
 ## Modifications to the World and Drone
 We customized the simulation environment by modifying the drone type to include a camera. We added an ArUco marker supported by a parallelepiped to enhance its visibility from the camera.
