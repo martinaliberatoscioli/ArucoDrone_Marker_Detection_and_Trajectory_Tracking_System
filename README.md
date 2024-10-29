@@ -40,6 +40,11 @@ bash ./PX4-Autopilot/Tools/setup/ubuntu.sh
 ```
 You will now need to restart your computer before continuing.
 
+### Install ROS2 Humble
+
+To install ROS2 Humble, follow the steps [here](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html).
+
+
 ## Installation
 
 1. Clone the repository:
