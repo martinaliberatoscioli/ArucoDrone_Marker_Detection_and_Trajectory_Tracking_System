@@ -1,7 +1,5 @@
 # ArucoDrone: Marker Detection System
 
-# ArucoDrone: Marker Detection System
-
 ## Description
 
 **ArucoDrone** is a project developed for the detection of ArUco markers using a drone controlled via PX4 and ROS2. By utilizing simulators like Gazebo and computer vision tools, this project demonstrates how a drone can identify and approach an ArUco marker in a simulated environment.
