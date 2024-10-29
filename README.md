@@ -24,9 +24,9 @@ Ensure you have the following components installed:
 
 ### Install PX4 Autopilot
 
-To install PX4, run the following code:
-
-
+1. To Install PX4 run this code
+   ```bash
+   git clone https://github.com/PX4/PX4-Autopilot.git --recursive -b release/1.14
 
 ## Installation
 
