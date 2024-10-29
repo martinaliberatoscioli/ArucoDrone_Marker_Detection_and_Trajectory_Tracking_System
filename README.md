@@ -44,6 +44,34 @@ You will now need to restart your computer before continuing.
 
 To install ROS2 Humble, follow the steps [here](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html).
 
+### Install Dependencies
+
+Install Python dependencies as mentioned in the PX4 Docs with the following command:
+
+```bash
+pip3 install --user -U empy pyros-genmsg setuptools
+```
+Additionally, I found that without these packages installed, Gazebo has issues loading:
+
+```bash
+pip3 install kconfiglib
+pip install --user jsonschema
+pip install --user jinja2
+```
+### Build Micro DDS
+
+As mentioned in the PX4 Docs, run the following commands to build MicroDDS on your machine:
+
+```bash
+git clone https://github.com/eProsima/Micro-XRCE-DDS-Agent.git
+cd Micro-XRCE-DDS-Agent
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+sudo ldconfig /usr/local/lib/
+```
 
 ## Installation
 
