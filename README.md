@@ -87,6 +87,21 @@ Run the following code to create a workspace in your home directory:
 mkdir -p ~/ros2_px4_offboard_example_ws/src
 cd ~/ros2_px4_offboard_example_ws/src
 ```
+### Clone in Packages 
+
+We first will need the `px4_msgs` package. Our ROS2 nodes will rely on the message definitions in this package in order to communicate with PX4. Read [here](https://docs.px4.io/master/en/ros/ros2.html) for more information.
+
+Be sure you're in the `src` directory of your workspace and then run the following command to clone the `px4_msgs` repo:
+
+```bash
+git clone https://github.com/PX4/px4_msgs.git -b release/1.14
+```
+
+Once again be sure you are still in the src directory of your workspace. Run this code to clone in our example package
+
+```bash
+git clone https://github.com/ARK-Electronics/ROS2_PX4_Offboard_Example.git
+```
 
 ## Installation
 
