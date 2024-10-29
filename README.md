@@ -20,6 +20,16 @@ Ensure you have the following components installed:
 - Ubuntu 22
 - Python 3.10
 
+## Setup Steps
+
+### Install PX4 Autopilot
+
+To install PX4, run the following code:
+
+```bash
+git clone https://github.com/PX4/PX4-Autopilot.git --recursive -b release/1.14
+
+
 ## Installation
 
 1. Clone the repository:
