@@ -73,6 +73,21 @@ sudo make install
 sudo ldconfig /usr/local/lib/
 ```
 
+### Setup Workspace
+
+This git repo is intended to be a ROS2 package that is cloned into a ROS2 workspace.
+
+We're going to create a workspace in our home directory, and then clone this repo and the `px4_msgs` repo.
+
+For more information on creating workspaces, see [here](https://docs.ros.org/en/humble/Tutorials/Workspace/Creating-Your-Workspace.html).
+
+Run the following code to create a workspace in your home directory:
+
+```bash
+mkdir -p ~/ros2_px4_offboard_example_ws/src
+cd ~/ros2_px4_offboard_example_ws/src
+```
+
 ## Installation
 
 1. Clone the repository:
