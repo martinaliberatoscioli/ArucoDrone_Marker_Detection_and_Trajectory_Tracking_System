@@ -24,9 +24,21 @@ Ensure you have the following components installed:
 
 ### Install PX4 Autopilot
 
-0. To Install PX4 run this code
-   ```bash
-   git clone https://github.com/PX4/PX4-Autopilot.git --recursive -b release/1.14
+Ecco il markdown formattato per la sezione "Install PX4 Autopilot" del tuo README:
+
+### Install PX4 Autopilot
+
+To install PX4, run the following code:
+
+```bash
+git clone https://github.com/PX4/PX4-Autopilot.git --recursive -b release/1.14
+```
+Run this script in a bash shell to install everything
+
+```bash
+bash ./PX4-Autopilot/Tools/setup/ubuntu.sh
+```
+You will now need to restart your computer before continuing.
 
 ## Installation
 
