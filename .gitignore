@@ -1,0 +1,14 @@
+# Ignorare i file di build di colcon
+build/
+install/
+log/
+
+# Ignorare file di compilazione Python
+__pycache__/
+*.pyc
+
+# Ignorare build di colcon
+build/
+install/
+log/
+
