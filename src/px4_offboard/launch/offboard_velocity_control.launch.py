@@ -1,14 +1,15 @@
 from launch import LaunchDescription
-from launch.actions import ExecuteProcess
+from launch.actions import ExecuteProcess, LogInfo
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 import os
 
 def generate_launch_description():
     package_dir = get_package_share_directory('px4_offboard')
+    rviz_config_path = os.path.join(package_dir, 'resource', 'visualize.rviz')  # Corretto il percorso
 
     return LaunchDescription([
-        # Bridge ROS-Gazebo per la camera RGBD
+        LogInfo(msg='Avvio del bridge ROS-Gazebo per la camera RGBD'),
         Node(
             package='ros_gz_bridge',
             executable='parameter_bridge',
@@ -16,7 +17,7 @@ def generate_launch_description():
             output='screen'
         ),
 
-        # Avvia il nodo visualizer
+        LogInfo(msg='Avvio del nodo visualizer'),
         Node(
             package='px4_offboard',
             namespace='px4_offboard',
@@ -24,7 +25,7 @@ def generate_launch_description():
             name='visualizer'
         ),
 
-        # Avvia il nodo processes (che gestisce altri processi)
+        LogInfo(msg='Avvio del nodo processes'),
         Node(
             package='px4_offboard',
             namespace='px4_offboard',
@@ -33,7 +34,7 @@ def generate_launch_description():
             prefix='gnome-terminal --'
         ),
 
-        # Avvia il nodo di controllo
+        LogInfo(msg='Avvio del nodo di controllo'),
         Node(
             package='px4_offboard',
             namespace='px4_offboard',
@@ -42,7 +43,7 @@ def generate_launch_description():
             prefix='gnome-terminal --'
         ),
 
-        # Controllo della velocità
+        LogInfo(msg='Avvio del nodo di controllo della velocità'),
         Node(
             package='px4_offboard',
             namespace='px4_offboard',
@@ -50,7 +51,7 @@ def generate_launch_description():
             name='velocity_control'
         ),
 
-        # Controllo del drone
+        LogInfo(msg='Avvio del nodo drone_control'),
         Node(
             package='px4_offboard',
             executable='drone_control',
@@ -58,7 +59,7 @@ def generate_launch_description():
             output='screen'
         ),
 
-        # Rilevamento dell'ArUco Marker
+        LogInfo(msg='Avvio del nodo di rilevamento ArUco Marker'),
         Node(
             package='px4_offboard',
             executable='detection',
@@ -66,27 +67,27 @@ def generate_launch_description():
             output='screen'
         ),
 
-        # Camera Publisher
+        LogInfo(msg='Avvio del nodo camera_publisher'),
         Node(
             package='px4_offboard',
             executable='camera_publisher_node',
             name='camera_publisher',
-            output='screen'
+            output='screen',
+            
         ),
 
-        # Avvia RViz per la visualizzazione
+        LogInfo(msg='Avvio di RViz per la visualizzazione'),
         Node(
             package='rviz2',
             namespace='',
             executable='rviz2',
             name='rviz2_node',
-            arguments=['-d', os.path.join(package_dir, 'resource', 'visualize.rviz')]
+            arguments=['-d', rviz_config_path]
         ),
 
-        # Avvia QGroundControl
+        LogInfo(msg='Avvio di QGroundControl'),
         ExecuteProcess(
             cmd=[os.path.expanduser('~/QGroundControl.AppImage')],
             output='screen'
         )
     ])
-
