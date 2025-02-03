@@ -8,18 +8,6 @@ def generate_launch_description():
     package_dir = get_package_share_directory('px4_offboard')
 
     return LaunchDescription([
-        # Avvia il server di Gazebo (Ignition Gazebo)
-        ExecuteProcess(
-            cmd=['ign', 'gazebo', '-v 4', os.path.join(package_dir, 'worlds', 'aruco.sdf')],
-            output='screen'
-        ),
-
-        # Avvia PX4 SITL con Gazebo
-        ExecuteProcess(
-            cmd=['gnome-terminal', '--', 'bash', '-c', 'cd ~/PX4-Autopilot && PX4_GZ_WORLD=aruco make px4_sitl gz_x500_mono_cam'],
-            output='screen'
-        ),
-
         # Bridge ROS-Gazebo per la camera RGBD
         Node(
             package='ros_gz_bridge',
@@ -101,3 +89,4 @@ def generate_launch_description():
             output='screen'
         )
     ])
+

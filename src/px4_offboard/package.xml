@@ -3,19 +3,37 @@
 <package format="3">
   <name>px4_offboard</name>
   <version>0.1.0</version>
-  <description>ROS2 PX4 Interface Velocity Control</description>
-  <maintainer email="braden@arkelectron.com">braden</maintainer>
+  <description>ROS2 PX4 Interface Aruco Drone</description>
+  <maintainer email="martinaliberatoscioli@gmail.com">martina</maintainer>
   <license>BSD-3</license>
   
-  <depend>px4_msgs</depend>
-  <depend>detection_package</depend>  
-  <exec_depend>ros2launch</exec_depend>
+  <!-- Dipendenze PX4 -->
+  <exec_depend>px4_msgs</exec_depend>
+  <exec_depend>detection_package</exec_depend>
+
+  <!-- Dipendenze per Gazebo e il bridge ROS-Gazebo -->
+  <exec_depend>ros_gz_bridge</exec_depend>
+
+  <!-- Dipendenze per la gestione delle immagini -->
   <exec_depend>cv_bridge</exec_depend>  
   <exec_depend>sensor_msgs</exec_depend> 
-  <!-- Aggiungi dipendenza da tf2_ros per la gestione delle trasformazioni -->
+  <exec_depend>image_transport</exec_depend>  
+  <exec_depend>compressed_image_transport</exec_depend>  
+  <exec_depend>camera_info_manager</exec_depend>  
+
+  <!-- Dipendenze per la gestione delle trasformazioni -->
   <exec_depend>tf2_ros</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
 
+  <!-- Dipendenze per la navigazione e la visualizzazione in RViz -->
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>visualization_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <!-- Dipendenze per l'avvio dei nodi -->
+  <exec_depend>ros2launch</exec_depend>
+
+  <!-- Dipendenze per i test -->
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>
