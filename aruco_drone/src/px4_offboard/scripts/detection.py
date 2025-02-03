@@ -83,9 +83,11 @@ class ParallelepipedAndMarkerDetector(Node):
                 self.publish_drone_command("approach")  # Invio comando per avvicinarsi
                 self.get_logger().info(detection_result)
 
+        # **Correzione OpenCV ArUco**
+        aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
+        parameters = cv2.aruco.DetectorParameters()
+
         # Rilevazione dell'ArUco marker
-        aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_6X6_250)
-        parameters = cv2.aruco.DetectorParameters_create()
         corners, ids, _ = cv2.aruco.detectMarkers(image, aruco_dict, parameters=parameters)
 
         if ids is not None:
@@ -143,4 +145,3 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-
