@@ -57,6 +57,10 @@ class OdometryLogger(Node):
     def save_to_csv(self):
         if self.data:
             df = pd.DataFrame(self.data, columns=["time", "pos_x", "pos_y", "pos_z", "vel_x", "vel_y", "vel_z"])
+
+            # **Forza il tempo a partire da zero e assicura valori coerenti**
+            df["time"] = df["time"] - df["time"].min()
+
             df.to_csv(self.csv_file, index=False)
             self.get_logger().info(f"Dati salvati in {self.csv_file}")
             self.plot_data(df)
@@ -64,25 +68,32 @@ class OdometryLogger(Node):
     def plot_data(self, df):
         plt.figure(figsize=(12, 6))
 
-        # Normalizza l'asse del tempo per partire da zero
+        # **Filtraggio del rumore nelle velocità usando un filtro moving average**
+        df["vel_x_smooth"] = df["vel_x"].rolling(window=5).mean()
+        df["vel_y_smooth"] = df["vel_y"].rolling(window=5).mean()
+        df["vel_z_smooth"] = df["vel_z"].rolling(window=5).mean()
+
+        # **Forza nuovamente la normalizzazione dell'asse X**
         df["time"] = df["time"] - df["time"].min()
 
         plt.subplot(2, 1, 1)
-        plt.plot(df["time"], df["pos_x"], label="X Position")
-        plt.plot(df["time"], df["pos_y"], label="Y Position")
-        plt.plot(df["time"], df["pos_z"], label="Z Position")
+        plt.plot(df["time"], df["pos_x"], label="X Position", linewidth=1.5)
+        plt.plot(df["time"], df["pos_y"], label="Y Position", linewidth=1.5)
+        plt.plot(df["time"], df["pos_z"], label="Z Position", linewidth=1.5)
         plt.xlabel("Time (s)")
         plt.ylabel("Position (m)")
         plt.legend()
+        plt.grid(True)  # Aggiunta della griglia
         plt.title("Drone Position Over Time")
 
         plt.subplot(2, 1, 2)
-        plt.plot(df["time"], df["vel_x"], label="X Velocity")
-        plt.plot(df["time"], df["vel_y"], label="Y Velocity")
-        plt.plot(df["time"], df["vel_z"], label="Z Velocity")
+        plt.plot(df["time"], df["vel_x_smooth"], label="X Velocity", linewidth=1.5)
+        plt.plot(df["time"], df["vel_y_smooth"], label="Y Velocity", linewidth=1.5)
+        plt.plot(df["time"], df["vel_z_smooth"], label="Z Velocity", linewidth=1.5)
         plt.xlabel("Time (s)")
         plt.ylabel("Velocity (m/s)")
         plt.legend()
+        plt.grid(True)  # Aggiunta della griglia
         plt.title("Drone Velocity Over Time")
 
         plt.tight_layout()

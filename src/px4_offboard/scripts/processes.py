@@ -1,38 +1,41 @@
 #!/usr/bin/env python3
 
-# Import the subprocess and time modules
+import rclpy
+from rclpy.node import Node
 import subprocess
 import time
 
-# List of commands to run
-commands = [
-    # Run the Micro XRCE-DDS Agent
-    "MicroXRCEAgent udp4 -p 8888",
+class ProcessesNode(Node):
+    def __init__(self):
+        super().__init__('processes')
+        self.get_logger().info("Avviando i processi per PX4 e Gazebo...")
 
-    # Run the PX4 SITL simulation with Ignition Gazebo (your custom world and drone)
-    "cd ~/PX4-Autopilot && PX4_GZ_WORLD=aruco make px4_sitl gz_x500_mono_cam",  # Avvia PX4 con Ignition Gazebo
+        commands = [
+            "source /opt/ros/humble/setup.bash && source ~/aruco_drone_proj/install/setup.bash",
+            "gnome-terminal -- bash -c 'MicroXRCEAgent udp4 -p 8888; exec bash'",
+            "gnome-terminal -- bash -c 'cd ~/PX4-Autopilot && PX4_GZ_WORLD=aruco make px4_sitl gz_x500_mono_cam; exec bash'",
+            "sleep 5",
+            "gnome-terminal -- bash -c 'ros2 run ros_gz_bridge parameter_bridge /rgbd_camera/image@sensor_msgs/msg/Image@gz.msgs.Image; exec bash'",
+            "sleep 3",
+            "gnome-terminal -- bash -c 'ros2 run px4_offboard detection; exec bash'",
+            "gnome-terminal -- bash -c 'ros2 run px4_offboard camera_publisher_node; exec bash'",
+            "gnome-terminal -- bash -c 'ros2 run px4_offboard visualizer; exec bash'",
+            "gnome-terminal -- bash -c 'ros2 run px4_offboard drone_control; exec bash'",
+            "gnome-terminal -- bash -c 'ros2 run px4_offboard velocity_control; exec bash'",
+            "gnome-terminal -- bash -c 'ros2 run px4_offboard odometry_logger; exec bash'",
+            "gnome-terminal -- bash -c 'cd ~ && ./QGroundControl.AppImage; exec bash'"
+        ]
 
-    # Run the ros_gz_bridge parameter bridge
-    "ros2 run ros_gz_bridge parameter_bridge /rgbd_camera/image@sensor_msgs/msg/Image@gz.msgs.Image",  # Bridge ROS 2 <-> Gazebo
-    
-    # Run the cube and marker detection node
-     "ros2 run px4_offboard detection"  # Lanciare il pacchetto per la detection 
+        for command in commands:
+            subprocess.run(command, shell=True)
+            time.sleep(2)
 
-    # Run the camera publisher node
-    "ros2 run px4_offboard camera_publisher_node"
-    
-    # Run QGroundControl
-    "cd ~ && ./QGroundControl.AppImage" # /home/martina/QGroundControl.AppImage
+def main(args=None):
+    rclpy.init(args=args)
+    node = ProcessesNode()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
 
-    
-]
-
-# Loop through each command in the list
-for command in commands:
-    # Each command is run in a new tab of the gnome-terminal
-    subprocess.run(["gnome-terminal", "--tab", "--", "bash", "-c", command + "; exec bash"])
-    
-    # Pause between each command
-    time.sleep(1)
-
-
+if __name__ == '__main__':
+    main()

@@ -8,24 +8,28 @@ class CameraPublisherNode(Node):
     def __init__(self):
         super().__init__('camera_publisher_node')
         self.bridge = CvBridge()
-        # Iscrizione al topic /rgbd_camera/image
-        self.subscription = self.create_subscription(
-            Image,
-            '/rgbd_camera/image',  # Il topic della videocamera simulata
-            self.image_callback,
-            10
-        )
-
-    def image_callback(self, msg):
+        
+        # Crea un publisher per inviare le immagini su /rgbd_camera/image
+        self.publisher = self.create_publisher(Image, '/rgbd_camera/image', 10)
+        
+        # Inizializza la videocamera (se usi una simulazione, questo può essere simulato con immagini statiche)
+        self.timer = self.create_timer(0.1, self.publish_image)  # Invio a 10Hz
+        
+        self.get_logger().info("Nodo Camera Publisher avviato, pubblicando su /rgbd_camera/image")
+    
+    def publish_image(self):
+        # Simula l'acquisizione di un frame dalla videocamera
+        ret, frame = cv2.VideoCapture(0).read()  # Usa la webcam reale, se disponibile
+        if not ret:
+            self.get_logger().warn("Impossibile acquisire il frame dalla videocamera.")
+            return
+        
         try:
-            # Converti il messaggio ROS 2 Image in un array NumPy (OpenCV)
-            frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
-
-            # Ora puoi elaborare l'immagine (ad esempio, rilevare l'ArUco marker)
-            # Usa OpenCV per visualizzare l'immagine o fare altro
-            cv2.imshow("Camera Feed", frame)
-            cv2.waitKey(1)
-
+            # Converti il frame OpenCV in messaggio ROS2 Image
+            msg = self.bridge.cv2_to_imgmsg(frame, encoding='bgr8')
+            self.publisher.publish(msg)
+            self.get_logger().info("Immagine pubblicata su /rgbd_camera/image")
+        
         except Exception as e:
             self.get_logger().error(f"Errore durante la conversione dell'immagine: {e}")
 
