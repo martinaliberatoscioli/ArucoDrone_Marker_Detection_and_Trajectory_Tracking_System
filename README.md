@@ -107,8 +107,8 @@ git clone https://github.com/ARK-Electronics/ROS2_PX4_Offboard_Example.git
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/repository-name.git
-   cd repository-name
+   git clone 
+   cd 
 2. Follow the instructions to set up PX4 and ROS2.
 
 3. Copy the ROS2_PX4_Offboard_Example into your workspace and prepare your configuration.
