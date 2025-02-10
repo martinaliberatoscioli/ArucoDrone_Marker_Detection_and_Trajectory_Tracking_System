@@ -7,7 +7,25 @@
 - Identify an **ArUco marker** in a simulated environment  
 - Analyze the content of the image within the marker  
 - Follow a predefined trajectory  
-- Dynamically visualize telemetry data through **Python plots**  
+- Dynamically visualize telemetry data through **Python plots**
+
+## Project Structure
+
+```
+ArucoDrone/
+│── src/                         # Source code
+│   ├── px4_offboard/
+│   │   ├── scripts/
+│   │   │   ├── detection.py       # ArUco marker detection
+│   │   │   ├── drone_control.py   # Drone control functions
+│   │   │   ├── waypoint_navigation.py # Waypoint trajectory execution
+│   │   │   ├── visualizer.py      # Telemetry visualization
+│   │   ├── ... other files ...
+│── config/                      # Drone configuration and parameters
+│── simulations/                 # Files for Gazebo simulation
+│── README.md                    # Project documentation
+│── requirements.txt              # Python dependencies
+```
 
 ## Prerequisites & Installation Guide
 
