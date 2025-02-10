@@ -24,7 +24,7 @@ Ensure you have the following components installed:
 
 ### Install PX4 Autopilot
 
-Ecco il markdown formattato per la sezione "Install PX4 Autopilot" del tuo README:
+la sezione "Install PX4 Autopilot" del tuo README:
 
 ### Install PX4 Autopilot
 
