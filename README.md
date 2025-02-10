@@ -130,8 +130,8 @@ pip3 install matplotlib pandas opencv-python
 Create and configure a ROS2 workspace:
 
 ```bash
-mkdir -p ~/ros2_px4_ws/src
-cd ~/ros2_px4_ws/src
+mkdir -p ~/drone/src
+cd ~/drone/src
 ```
 
 Now, clone the required ROS2 packages:
@@ -142,7 +142,7 @@ git clone https://github.com/PX4/px4_msgs.git -b release/1.14
 
 Then, build the workspace:
 ```bash
-cd ~/ros2_px4_ws
+cd ~/drone
 colcon build
 source install/setup.bash
 ```
@@ -153,7 +153,10 @@ source install/setup.bash
 After installing everything, you can launch the simulation with:
 
 ```bash
-cd ~/ros2_px4_ws/src
+cd drone
+colcon build
+source install/setup.bash
+cd src
 ros2 launch px4_offboard offboard_velocity_control.launch.py
 ```
 
@@ -165,12 +168,19 @@ We customized the simulation environment by modifying the drone type to include 
 ## Approach Script
 We implemented a script that initially positions the drone 6 meters away from the marker. The drone approaches to 1 meter from the marker to begin detection.
 
+## Contributing
+If you wish to contribute, feel free to fork the repository and submit a pull request.
+
+## License
+This project is distributed under the MIT License. See the LICENSE file for more details.
+
 ## Instructions
 1. The folders **arucotag** and **x500_mono_cam** must be moved to `/PX4-Autopilot/Tools/simulation/gz/models` once the repository is cloned.
 2. The file `aruco.sdf` must be moved to `/PX4-Autopilot/Tools/simulation/gz/worlds`.
 
 ## Launching the Simulation
 ```bash
+cd drone
 colcon build
 source install/setup.bash
 cd src
