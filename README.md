@@ -17,8 +17,7 @@ drone/
 │   ├── px4_offboard/
 │   │   ├── scripts/
 │   │   │   ├── detection.py       # ArUco marker detection
-│   │   │   ├── drone_control.py   # Drone control functions
-│   │   │   ├── waypoint_navigation.py # Waypoint trajectory execution
+│   │   │   ├── control.py   # Drone control functions
 │   │   │   ├── visualizer.py      # Telemetry visualization
 │   │   ├── ... other files ...
 │── config/                      # Drone configuration and parameters
