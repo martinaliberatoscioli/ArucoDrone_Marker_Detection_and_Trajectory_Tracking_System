@@ -9,69 +9,78 @@
 - Follow a predefined trajectory  
 - Dynamically visualize telemetry data through **Python plots**  
 
-This repository is a derivative of the **Offboard example** by [Jaeyoung Lim](https://github.com/Jaeyoung-Lim/px4-offboard), with several added features.  
+## Prerequisites & Installation Guide
 
-## Prerequisites
+### 1. Install PX4 Autopilot
+PX4 is the flight control system required for the drone simulation.
 
-Ensure you have the following components installed:
-
-- **PX4 Autopilot**  
-- **ROS2 Humble**  
-- **QGroundControl**  
-- **Micro XRCE-DDS Agent**  
-- **RViz**  
-- **Ubuntu 22**  
-- **Python 3.10**  
-- **Gazebo** *(for drone simulation)*  
-- **OpenCV** *(for computer vision)*  
-- **Matplotlib & Pandas** *(for telemetry visualization)*
-
-## Project Structure
-
-```
-drone/
-│── src/                         # Source code
-│   ├── px4_offboard/
-│   │   ├── scripts/
-│   │   │   ├── detection.py       # ArUco marker detection
-│   │   │   ├── drone_control.py   # Drone control functions
-│   │   │   ├── waypoint_navigation.py # Waypoint trajectory execution
-│   │   │   ├── visualizer.py      # Telemetry visualization
-│   │   ├── ... other files ...
-│── config/                      # Drone configuration and parameters
-│── simulations/                 # Files for Gazebo simulation
-│── README.md                    # Project documentation
-│── requirements.txt              # Python dependencies
-```
-
-## Setup Steps
-
-### Install PX4 Autopilot
-
-To install PX4, run the following code:
 ```bash
 git clone https://github.com/PX4/PX4-Autopilot.git --recursive -b release/1.14
 ```
-Run this script in a bash shell to install everything:
+
+Now, install the required dependencies:
+
 ```bash
 bash ./PX4-Autopilot/Tools/setup/ubuntu.sh
 ```
-You will now need to restart your computer before continuing.
 
-### Install ROS2 Humble
+Reboot your computer after installation.
 
-Follow the steps [here](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html) to install ROS2 Humble.
+---
 
-### Install Dependencies
+### 2. Install ROS2 Humble
+ROS2 is used for communication between different drone components.
+
+Follow the official installation steps for **ROS2 Humble**:
+[ROS2 Humble Installation Guide](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html)
+
+Alternatively, you can install it using:
 
 ```bash
-pip3 install --user -U empy pyros-genmsg setuptools
-pip3 install kconfiglib
-pip install --user jsonschema
-pip install --user jinja2
+sudo apt update && sudo apt install -y \
+  ros-humble-desktop \
+  ros-dev-tools
 ```
 
-### Build Micro DDS
+To configure the ROS2 environment:
+```bash
+echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+
+---
+
+### 3. Install Gazebo Garden 7.9.0
+Gazebo is the simulation environment for the drone.
+
+```bash
+sudo apt install -y gazebo
+```
+
+You may also need the **Gazebo ROS2 bridge**:
+```bash
+sudo apt install -y ros-humble-gazebo-ros-pkgs
+```
+
+---
+
+### 4. Install QGroundControl
+QGroundControl is used for visualizing telemetry and controlling the drone.
+
+Download the latest AppImage from the official website:
+[QGroundControl Download](https://docs.qgroundcontrol.com/en/getting_started/download_and_install.html)
+
+Then, make it executable:
+```bash
+chmod +x QGroundControl.AppImage
+./QGroundControl.AppImage
+```
+
+---
+
+### 5. Install Micro XRCE-DDS Agent
+This is required for communication between PX4 and ROS2.
+
 ```bash
 git clone https://github.com/eProsima/Micro-XRCE-DDS-Agent.git
 cd Micro-XRCE-DDS-Agent
@@ -82,36 +91,55 @@ make
 sudo make install
 sudo ldconfig /usr/local/lib/
 ```
-### Clone in Packages
+
+---
+
+### 6. Install Python Dependencies
+This project requires additional Python packages.
+
 ```bash
-git clone https://github.com/PX4/px4_msgs.git -b release/1.14
-git clone https://github.com/ARK-Electronics/ROS2_PX4_Offboard_Example.git
+pip3 install --user -U empy pyros-genmsg setuptools kconfiglib jsonschema jinja2
 ```
 
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone <your-repo-url>
-   cd <repo-name>
-   ```
-2. Follow the instructions to set up PX4 and ROS2.
-3. Copy the `ROS2_PX4_Offboard_Example` into your workspace and prepare your configuration.
+For telemetry visualization, install:
+```bash
+pip3 install matplotlib pandas opencv-python
+```
 
-This will start:
-- **`px4_msgs`** and **`px4_offboard`** package builds
-- The necessary ROS2 environment setup
-- The **offboard_velocity_control.launch.py** script to initiate the drone control system
+---
 
-### Drone Controls
-- **W**: Up
-- **S**: Down
-- **A**: Yaw Left
-- **D**: Yaw Right
-- **Up Arrow**: Pitch Forward
-- **Down Arrow**: Pitch Backward
-- **Left Arrow**: Roll Left
-- **Right Arrow**: Roll Right
-- **Space**: Arm/Disarm
+### 7. Setup the ROS2 Workspace
+Create and configure a ROS2 workspace:
+
+```bash
+mkdir -p ~/ros2_px4_ws/src
+cd ~/ros2_px4_ws/src
+```
+
+Now, clone the required ROS2 packages:
+
+```bash
+git clone https://github.com/PX4/px4_msgs.git -b release/1.14
+```
+
+Then, build the workspace:
+```bash
+cd ~/ros2_px4_ws
+colcon build
+source install/setup.bash
+```
+
+---
+
+## Final Steps
+After installing everything, you can launch the simulation with:
+
+```bash
+cd ~/ros2_px4_ws/src
+ros2 launch px4_offboard offboard_velocity_control.launch.py
+```
+
+Your environment is now ready!
 
 ## Modifications to the World and Drone
 We customized the simulation environment by modifying the drone type to include a camera. We added an ArUco marker supported by a parallelepiped to enhance its visibility from the camera.
@@ -125,10 +153,9 @@ If you wish to contribute, feel free to fork the repository and submit a pull re
 ## License
 This project is distributed under the MIT License. See the LICENSE file for more details.
 
-
-## ISTRUZIONI
-1. le cartelle **arucotag** e **x500_mono_cam** una volta clonato il repository devono essere spostate in /PX4-Autopilot/Tools/simulation/gz/models
-2. il file aruco.sdf va spostata in /PX4-Autopilot/Tools/simulation/gz/worlds
+## Instructions
+1. The folders **arucotag** and **x500_mono_cam** must be moved to `/PX4-Autopilot/Tools/simulation/gz/models` once the repository is cloned.
+2. The file `aruco.sdf` must be moved to `/PX4-Autopilot/Tools/simulation/gz/worlds`.
 
 ## Launching the Simulation
 ```bash
@@ -137,7 +164,3 @@ source install/setup.bash
 cd src
 ros2 launch px4_offboard offboard_velocity_control.launch.py
 ```
-
-
-
-
