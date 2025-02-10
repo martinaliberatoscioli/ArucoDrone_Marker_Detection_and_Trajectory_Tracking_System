@@ -141,6 +141,7 @@ Use the following commands to control the drone:
 ## Modifications to the World and Drone
 We customized the simulation environment by modifying the drone type to include a camera. We added an ArUco marker supported by a parallelepiped to enhance its visibility from the camera.
 
+
 ## Approach Script
 We implemented a script that initially positions the drone 6 meters away from the marker. The drone approaches to 1 meter from the marker to begin detection.
 
@@ -149,5 +150,18 @@ If you wish to contribute to the project, feel free to fork the repository and s
 
 ## License
 This project is distributed under the MIT License. See the LICENSE file for more details.
+
+## ISTRUZIONI
+1. le cartelle **arucotag** e **x500_mono_cam** una volta clonato il repository devono essere spostate in /PX4-Autopilot/Tools/simulation/gz/models
+2. il file aruco.sdf va spostata in /PX4-Autopilot/Tools/simulation/gz/worlds
+
+## LANCIARE LA SIMULAZIONE
+colcon build
+source install setup/.bash
+cd src
+ros2 launch px4_offboard offboard_velocity_control.launch.py 
+
+
+
 
 
