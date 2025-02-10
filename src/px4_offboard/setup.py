@@ -29,7 +29,6 @@ setup(
     license='Apache License 2.0',
     entry_points={
         'console_scripts': [
-            'drone_control = px4_offboard.drone_control:main',
             'visualizer = px4_offboard.visualizer:main',
             'velocity_control = px4_offboard.velocity_control:main',
             'control = px4_offboard.control:main',
@@ -38,7 +37,6 @@ setup(
             'camera_publisher_node = px4_offboard.camera_publisher_node:main',
             'camera_tf2_publisher = px4_offboard.camera_tf2_publisher:main',
             'odometry_logger = px4_offboard.odometry_logger:main',
-            'waypoint_navigation = px4_offboard.waypoint_navigation:main'
         ],
     },
 )

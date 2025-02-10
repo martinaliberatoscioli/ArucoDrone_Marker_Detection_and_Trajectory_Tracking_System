@@ -51,13 +51,6 @@ def generate_launch_description():
             name='velocity_control'
         ),
 
-        LogInfo(msg='Avvio del nodo drone_control'),
-        Node(
-            package='px4_offboard',
-            executable='drone_control',
-            name='drone_control',
-            output='screen'
-        ),
 
         LogInfo(msg='Avvio del nodo di rilevamento ArUco Marker'),
         Node(

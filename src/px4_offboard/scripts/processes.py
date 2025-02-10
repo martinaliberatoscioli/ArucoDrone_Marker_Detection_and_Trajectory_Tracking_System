@@ -20,8 +20,6 @@ commands = [
     # Avvia il nodo della camera
     "ros2 run px4_offboard camera_publisher_node",
 
-
-
     # Avvia il logger dell'odometria
     "ros2 run px4_offboard odometry_logger",
 
