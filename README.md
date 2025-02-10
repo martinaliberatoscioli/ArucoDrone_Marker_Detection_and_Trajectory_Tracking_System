@@ -160,8 +160,6 @@ cd src
 ros2 launch px4_offboard offboard_velocity_control.launch.py
 ```
 
-Your environment is now ready!
-
 ## Modifications to the World and Drone
 We customized the simulation environment by modifying the drone type to include a camera. We added an ArUco marker supported by a parallelepiped to enhance its visibility from the camera.
 
