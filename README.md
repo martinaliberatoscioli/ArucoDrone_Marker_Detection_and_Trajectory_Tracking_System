@@ -29,7 +29,7 @@ Ensure you have the following components installed:
 ## Project Structure
 
 ```
-ArucoDrone/
+drone/
 │── src/                         # Source code
 │   ├── px4_offboard/
 │   │   ├── scripts/
