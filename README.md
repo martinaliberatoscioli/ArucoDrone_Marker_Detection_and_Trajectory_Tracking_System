@@ -165,12 +165,6 @@ We customized the simulation environment by modifying the drone type to include 
 ## Approach Script
 We implemented a script that initially positions the drone 6 meters away from the marker. The drone approaches to 1 meter from the marker to begin detection.
 
-## Contributing
-If you wish to contribute, feel free to fork the repository and submit a pull request.
-
-## License
-This project is distributed under the MIT License. See the LICENSE file for more details.
-
 ## Instructions
 1. The folders **arucotag** and **x500_mono_cam** must be moved to `/PX4-Autopilot/Tools/simulation/gz/models` once the repository is cloned.
 2. The file `aruco.sdf` must be moved to `/PX4-Autopilot/Tools/simulation/gz/worlds`.
