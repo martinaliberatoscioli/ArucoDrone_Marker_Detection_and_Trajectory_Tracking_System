@@ -1,40 +1,58 @@
-# ArucoDrone: Marker Detection System
+# ArucoDrone: Marker Detection and Trajectory Tracking System
 
 ## Overview
 
-**ArucoDrone** is a project developed for the detection of ArUco markers using a drone controlled via PX4 and ROS2. By utilizing simulators like Gazebo and computer vision tools, this project demonstrates how a drone can identify and approach an ArUco marker in a simulated environment.
+**ArucoDrone** is a project developed for detecting **ArUco markers** using a drone controlled via **PX4** and **ROS2**. This project utilizes simulators like **Gazebo** and computer vision tools to enable the drone to:
 
-This repo is a derivative of Jaeyoung Lim's Offboard example https://github.com/Jaeyoung-Lim/px4-offboard
+- Identify an **ArUco marker** in a simulated environment  
+- Analyze the content of the image within the marker  
+- Follow a predefined trajectory  
+- Dynamically visualize telemetry data through **Python plots**  
 
-I've taken his example and added some functionality.
+This repository is a derivative of the **Offboard example** by [Jaeyoung Lim](https://github.com/Jaeyoung-Lim/px4-offboard), with several added features.  
 
 ## Prerequisites
 
 Ensure you have the following components installed:
 
-- PX4 Autopilot
-- ROS2 Humble
-- QGroundControl
-- Micro XRCE-DDS Agent
-- RViz
-- Ubuntu 22
-- Python 3.10
+- **PX4 Autopilot**  
+- **ROS2 Humble**  
+- **QGroundControl**  
+- **Micro XRCE-DDS Agent**  
+- **RViz**  
+- **Ubuntu 22**  
+- **Python 3.10**  
+- **Gazebo** *(for drone simulation)*  
+- **OpenCV** *(for computer vision)*  
+- **Matplotlib & Pandas** *(for telemetry visualization)*
+
+## Project Structure
+
+```
+ArucoDrone/
+│── src/                         # Source code
+│   ├── px4_offboard/
+│   │   ├── scripts/
+│   │   │   ├── detection.py       # ArUco marker detection
+│   │   │   ├── drone_control.py   # Drone control functions
+│   │   │   ├── waypoint_navigation.py # Waypoint trajectory execution
+│   │   │   ├── visualizer.py      # Telemetry visualization
+│   │   ├── ... other files ...
+│── config/                      # Drone configuration and parameters
+│── simulations/                 # Files for Gazebo simulation
+│── README.md                    # Project documentation
+│── requirements.txt              # Python dependencies
+```
 
 ## Setup Steps
 
 ### Install PX4 Autopilot
 
-la sezione "Install PX4 Autopilot" del tuo README:
-
-### Install PX4 Autopilot
-
 To install PX4, run the following code:
-
 ```bash
 git clone https://github.com/PX4/PX4-Autopilot.git --recursive -b release/1.14
 ```
-Run this script in a bash shell to install everything
-
+Run this script in a bash shell to install everything:
 ```bash
 bash ./PX4-Autopilot/Tools/setup/ubuntu.sh
 ```
@@ -42,26 +60,18 @@ You will now need to restart your computer before continuing.
 
 ### Install ROS2 Humble
 
-To install ROS2 Humble, follow the steps [here](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html).
+Follow the steps [here](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html) to install ROS2 Humble.
 
 ### Install Dependencies
 
-Install Python dependencies as mentioned in the PX4 Docs with the following command:
-
 ```bash
 pip3 install --user -U empy pyros-genmsg setuptools
-```
-Additionally, I found that without these packages installed, Gazebo has issues loading:
-
-```bash
 pip3 install kconfiglib
 pip install --user jsonschema
 pip install --user jinja2
 ```
+
 ### Build Micro DDS
-
-As mentioned in the PX4 Docs, run the following commands to build MicroDDS on your machine:
-
 ```bash
 git clone https://github.com/eProsima/Micro-XRCE-DDS-Agent.git
 cd Micro-XRCE-DDS-Agent
@@ -74,60 +84,32 @@ sudo ldconfig /usr/local/lib/
 ```
 
 ### Setup Workspace
-
-This git repo is intended to be a ROS2 package that is cloned into a ROS2 workspace.
-
-We're going to create a workspace in our home directory, and then clone this repo and the `px4_msgs` repo.
-
-For more information on creating workspaces, see [here](https://docs.ros.org/en/humble/Tutorials/Workspace/Creating-Your-Workspace.html).
-
-Run the following code to create a workspace in your home directory:
-
 ```bash
 mkdir -p ~/ros2_px4_offboard_example_ws/src
 cd ~/ros2_px4_offboard_example_ws/src
 ```
-### Clone in Packages 
 
-We first will need the `px4_msgs` package. Our ROS2 nodes will rely on the message definitions in this package in order to communicate with PX4. Read [here](https://docs.px4.io/master/en/ros/ros2.html) for more information.
-
-Be sure you're in the `src` directory of your workspace and then run the following command to clone the `px4_msgs` repo:
-
+### Clone in Packages
 ```bash
 git clone https://github.com/PX4/px4_msgs.git -b release/1.14
-```
-
-Once again be sure you are still in the src directory of your workspace. Run this code to clone in our example package
-
-```bash
 git clone https://github.com/ARK-Electronics/ROS2_PX4_Offboard_Example.git
 ```
 
 ## Installation
-
 1. Clone the repository:
    ```bash
-   git clone 
-   cd 
+   git clone <your-repo-url>
+   cd <repo-name>
+   ```
 2. Follow the instructions to set up PX4 and ROS2.
+3. Copy the `ROS2_PX4_Offboard_Example` into your workspace and prepare your configuration.
 
-3. Copy the ROS2_PX4_Offboard_Example into your workspace and prepare your configuration.
-
-## Running the System
-
-After setting up the environment, you can start the system by running the following commands. This will launch several processes:
-
-- **processes.py** in a new window
-- **MicroDDS** in a new terminal window
-- **Gazebo** in a second tab in the same terminal window
-- **Gazebo GUI** in its own window
-- **control.py** in a new window
-- **RViz** in a new window
+This will start:
+- **`px4_msgs`** and **`px4_offboard`** package builds
+- The necessary ROS2 environment setup
+- The **offboard_velocity_control.launch.py** script to initiate the drone control system
 
 ### Drone Controls
-
-Use the following commands to control the drone:
-
 - **W**: Up
 - **S**: Down
 - **A**: Yaw Left
@@ -141,15 +123,15 @@ Use the following commands to control the drone:
 ## Modifications to the World and Drone
 We customized the simulation environment by modifying the drone type to include a camera. We added an ArUco marker supported by a parallelepiped to enhance its visibility from the camera.
 
-
 ## Approach Script
 We implemented a script that initially positions the drone 6 meters away from the marker. The drone approaches to 1 meter from the marker to begin detection.
 
 ## Contributing
-If you wish to contribute to the project, feel free to fork the repository and submit a pull request.
+If you wish to contribute, feel free to fork the repository and submit a pull request.
 
 ## License
 This project is distributed under the MIT License. See the LICENSE file for more details.
+
 
 ## ISTRUZIONI
 1. le cartelle **arucotag** e **x500_mono_cam** una volta clonato il repository devono essere spostate in /PX4-Autopilot/Tools/simulation/gz/models
