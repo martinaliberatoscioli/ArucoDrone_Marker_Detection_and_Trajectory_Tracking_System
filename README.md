@@ -12,7 +12,7 @@
 ## Project Structure
 
 ```
-ArucoDrone/
+drone/
 │── src/                         # Source code
 │   ├── px4_offboard/
 │   │   ├── scripts/
