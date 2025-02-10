@@ -82,13 +82,6 @@ make
 sudo make install
 sudo ldconfig /usr/local/lib/
 ```
-
-### Setup Workspace
-```bash
-mkdir -p ~/ros2_px4_offboard_example_ws/src
-cd ~/ros2_px4_offboard_example_ws/src
-```
-
 ### Clone in Packages
 ```bash
 git clone https://github.com/PX4/px4_msgs.git -b release/1.14
