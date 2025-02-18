@@ -4,25 +4,28 @@
 
 **ArucoDrone** is a project developed for detecting **ArUco markers** using a drone controlled via **PX4** and **ROS2**. This project utilizes simulators like **Gazebo** and computer vision tools to enable the drone to:
 
-- Identify an **ArUco marker** in a simulated environment  
-- Analyze the content of the image within the marker  
-- Follow a predefined trajectory  
-- Dynamically visualize telemetry data through **Python plots**
+- Detect an **ArUco marker** in the simulation
+- Analysìze the content of the marker and publish an associated image when the marker with ID 42 is detected
+- Follow a predefined trajectory and maintaining position
+- Dynamically visualize real-time telemetry data through **Python plots**
 
 ## Project Structure
 
 ```
 drone/
 │── src/
-|    │── px4_msgs                     # Source code
+|    │── px4_msgs                     # PX4 ROS2 Messages
 │   ├── px4_offboard/
 │   │   ├── scripts/
 │   │   │   ├── detection.py               # ArUco marker detection
-│   │   │   ├── camera_publisher_node.py   # Drone control functions
-│   │   │   ├── visualizer.py              # Telemetry visualization
-│   │   ├── ... other files ...
-|   │── ros_gz      
+│   │   │   ├── camera_publisher_node.py   # Publishes images from the drone camera
+│   │   │   ├── offboard.py                # Drone Offboard control
+│   │   │   ├── odometry_logger.py         # Logs and plots drone odometry
+│   │   │   ├── processes.py               # Automates launch of multiple ROS nodes
+│   │   │   ├── visualizer.py              # Visualization of telemetry data
+│   │   ├── ...
 │── README.md                    # Project documentation
+
 ```
 
 ## Prerequisites & Installation Guide
@@ -115,6 +118,7 @@ This project requires additional Python packages.
 
 ```bash
 pip3 install --user -U empy pyros-genmsg setuptools kconfiglib jsonschema jinja2
+pip3 install matplotlib pandas opencv-python numpy rclpy cv_bridge
 ```
 
 For telemetry visualization, install:
@@ -128,7 +132,6 @@ pip3 install matplotlib pandas opencv-python
 Create and configure a ROS2 workspace:
 
 ```bash
-mkdir -p ~/drone/src
 cd ~/drone/src
 ```
 
