@@ -2,7 +2,7 @@
 
 ## Overview
 
-**ArucoDrone** is a project developed for detecting **ArUco markers** using a drone controlled via **PX4** and **ROS2**. This project utilizes simulators like **Gazebo** and computer vision tools to enable the drone to:
+**ArucoDrone** is a project developed for detecting **ArUco markers** using a drone controlled via **PX4** and **ROS2**. This project utilizes **Gazebo** simulator and computer vision tools to enable the drone to:
 
 - Detect an **ArUco marker** in the simulation
 - Analysìze the content of the marker and publish an associated image when the marker with ID 42 is detected
