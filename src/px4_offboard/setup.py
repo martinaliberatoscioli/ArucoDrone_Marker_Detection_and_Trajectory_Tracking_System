@@ -20,7 +20,8 @@ setup(
         'cv_bridge',
         'image_transport',
         'compressed_image_transport',
-        'sensor_msgs'
+        'sensor_msgs',
+        'px4_msgs'
     ],
     zip_safe=True,
     maintainer='Martina',
@@ -30,12 +31,11 @@ setup(
     entry_points={
         'console_scripts': [
             'visualizer = px4_offboard.visualizer:main',
-            'velocity_control = px4_offboard.velocity_control:main',
-            'control = px4_offboard.control:main',
+            'offboard = px4_offboard.offboard:main',
             'processes = px4_offboard.processes:main',
             'detection = px4_offboard.detection:main',
             'camera_publisher_node = px4_offboard.camera_publisher_node:main',
-            'camera_tf2_publisher = px4_offboard.camera_tf2_publisher:main',
+            'velocity_control = px4_offboard.velocity_control:main',
             'odometry_logger = px4_offboard.odometry_logger:main',
         ],
     },
