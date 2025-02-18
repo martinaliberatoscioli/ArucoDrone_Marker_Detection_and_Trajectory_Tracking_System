@@ -150,22 +150,23 @@ source install/setup.bash
 
 ---
 
-## Final Steps
-After installing everything, you can launch the simulation with:
-
-```bash
-cd drone
-colcon build
-source install/setup.bash
-cd src
-ros2 launch px4_offboard offboard_velocity_control.launch.py
-```
-
 ## Modifications to the World and Drone
-We customized the simulation environment by modifying the drone type to include a camera. We added an ArUco marker supported by a parallelepiped to enhance its visibility from the camera.
+The simulation environment has been modified as follows:
 
-## Approach Script
-We implemented a script that initially positions the drone 6 meters away from the marker. The drone approaches to 1 meter from the marker to begin detection.
+1. The **drone model** has been customized to include a camera.
+2. An **ArUco marker** has been added, placed on a parallelepiped to improve its visibility from the drone's camera.
+3. The drone can detect the marker, process the associated image, and adjust its trajectory accordingly.
+
+## **Approach and Detection Script**  
+
+A set of scripts has been implemented to manage the drone's approach and marker detection process. The system follows these steps:  
+
+1. **Positioning:** At startup, the drone is positioned **6 meters away** from the ArUco marker.  
+2. **Approach Phase:** The drone autonomously moves **closer to 1 meter** from the marker before starting the detection.  
+3. **Marker Detection:** When the **ArUco marker with ID 42** is detected, the system **publishes the associated image** (`Bologna.jpg`) to the `/processed_camera/image` topic.  
+4. **Real-time Telemetry Display:** The system continuously logs **position data, altitude, and marker detection status**, which can be visualized in real-time.  
+
+The detection and control system is built using multiple ROS2 nodes, each handling a specific aspect of the drone’s operation, including camera image processing, trajectory tracking, and telemetry visualization.
 
 ## Contributing
 If you wish to contribute, feel free to fork the repository and submit a pull request.
@@ -173,11 +174,40 @@ If you wish to contribute, feel free to fork the repository and submit a pull re
 ## License
 This project is distributed under the MIT License. See the LICENSE file for more details.
 
-## Instructions
-1. The folders **arucotag** and **x500_mono_cam** must be moved to `/PX4-Autopilot/Tools/simulation/gz/models` once the repository is cloned.
-2. The file `aruco.sdf` must be moved to `/PX4-Autopilot/Tools/simulation/gz/worlds`.
+## **Setup Instructions**  
 
-## Launching the Simulation
+### **1 Move Rrquired Models**  
+
+Before launching the simulation, the necessary models must be placed in the PX4 directories to ensure proper rendering of the ArUco marker and the modified drone model. Run the following commands:  
+
+```bash
+cp -r ~/drone/src/px4_offboard/arucotag ~/PX4-Autopilot/Tools/simulation/gz/models/
+cp -r ~/drone/src/px4_offboard/x500_mono_cam ~/PX4-Autopilot/Tools/simulation/gz/models/
+cp ~/drone/src/px4_offboard/aruco.sdf ~/PX4-Autopilot/Tools/simulation/gz/worlds/
+```
+### **2. Description of the required Files**  
+
+The following files are essential for the correct setup of the simulation environment:  
+
+- **`arucotag`**: The 3D model of the **ArUco marker**, used for detection during the simulation.  
+- **`x500_mono_cam`**: A **modified drone model equipped with an integrated camera**, enabling real-time image capture for marker detection.  
+- **`aruco.sdf`**: The **simulation world file** containing the ArUco marker and defining its placement within the environment.  
+
+These files must be correctly placed in the designated PX4 directories to ensure proper functionality of the system.
+
+### **Modifying the Image Path**  
+
+The script responsible for publishing the associated image when the **ArUco marker ID 42** is detected requires specifying the correct path to the image file.  
+
+By default, the image path is set as:  
+
+```python
+self.bologna_image_path = "/home/martina/drone/src/px4_offboard/scripts/Bologna.jpg"
+```
+To ensure the script correctly locates the image, modify this path to match the actual location of **Bologna.jpg** on your system. 
+
+## Final Step: Launching the Simulation
+Once you have copleted all the passages, you can launch the simulation running:
 ```bash
 cd drone
 colcon build
