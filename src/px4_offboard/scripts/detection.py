@@ -124,7 +124,7 @@ class ParallelepipedAndMarkerDetector(Node):
             self.aruco_pose_pub.publish(pose_msg)
             self.get_logger().info(f"Posizione ArUco pubblicata: {marker_position}")
         else:
-            self.get_logger().warn("⚠️ Impossibile pubblicare Pose: marker_position è None!")
+            self.get_logger().warn("Impossibile pubblicare Pose: marker_position è None!")
 
     def calculate_marker_position(self, corners):
         """Ritorna (x, y, 0) come posizione media del marker."""
