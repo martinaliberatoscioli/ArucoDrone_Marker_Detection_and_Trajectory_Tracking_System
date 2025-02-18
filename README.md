@@ -215,3 +215,7 @@ source install/setup.bash
 cd src
 ros2 launch px4_offboard offboard_velocity_control.launch.py
 ```
+To see the associated image of the detected ArUco marker, open a new terminal and type:
+```bash
+rqt
+```
