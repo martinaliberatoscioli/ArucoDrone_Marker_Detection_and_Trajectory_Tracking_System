@@ -6,7 +6,7 @@ import os
 
 def generate_launch_description():
     package_dir = get_package_share_directory('px4_offboard')
-    rviz_config_path = os.path.join(package_dir, 'resource', 'visualize.rviz')  # Corretto il percorso
+    rviz_config_path = os.path.join(package_dir, 'resource', 'visualize.rviz') 
 
     return LaunchDescription([
         LogInfo(msg='Avvio del bridge ROS-Gazebo per la camera RGBD'),
@@ -33,25 +33,16 @@ def generate_launch_description():
             name='processes',
             prefix='gnome-terminal --'
         ),
-
-        LogInfo(msg='Avvio del nodo di controllo'),
-        Node(
-            package='px4_offboard',
-            namespace='px4_offboard',
-            executable='control',
-            name='control',
-            prefix='gnome-terminal --'
-        ),
-
+        
         LogInfo(msg='Avvio del nodo di controllo della velocità'),
         Node(
             package='px4_offboard',
-            namespace='px4_offboard',
-            executable='velocity_control',
-            name='velocity_control'
+            executable='offboard',
+            name='offboard_control_takeoff_and_land',
+            output = 'screen'
         ),
 
-
+    
         LogInfo(msg='Avvio del nodo di rilevamento ArUco Marker'),
         Node(
             package='px4_offboard',
