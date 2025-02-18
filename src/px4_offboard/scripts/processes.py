@@ -20,11 +20,14 @@ commands = [
     # Avvia il nodo della camera
     "ros2 run px4_offboard camera_publisher_node",
 
+   # Avvia il nodo di controllo del drone
+    "ros2 run px4_offboard offboard",
+
     # Avvia il logger dell'odometria
     "ros2 run px4_offboard odometry_logger",
 
     # Avvia QGroundControl
-    "cd ~ && ./QGroundControl.AppImage"
+    #"cd ~ && ./QGroundControl.AppImage"
 ]
 
 # Esegue ogni comando in una nuova scheda del terminale
