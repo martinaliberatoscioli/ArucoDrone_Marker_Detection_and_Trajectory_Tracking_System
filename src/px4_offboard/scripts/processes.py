@@ -8,7 +8,7 @@ commands = [
     # Avvia Micro XRCE-DDS Agent
     "MicroXRCEAgent udp4 -p 8888",
 
-    # Avvia PX4 SITL con Ignition Gazebo
+    # Avvia PX4 SITL con  Gazebo
     "cd ~/PX4-Autopilot && PX4_GZ_WORLD=aruco make px4_sitl gz_x500_mono_cam",
 
     # Avvia il ROS-Gazebo Bridge
