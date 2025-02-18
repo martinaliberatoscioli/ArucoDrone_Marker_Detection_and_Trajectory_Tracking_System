@@ -13,17 +13,16 @@
 
 ```
 drone/
-│── src/                         # Source code
+│── src/
+|    │── px4_msgs                     # Source code
 │   ├── px4_offboard/
 │   │   ├── scripts/
-│   │   │   ├── detection.py       # ArUco marker detection
-│   │   │   ├── control.py   # Drone control functions
-│   │   │   ├── visualizer.py      # Telemetry visualization
+│   │   │   ├── detection.py               # ArUco marker detection
+│   │   │   ├── camera_publisher_node.py   # Drone control functions
+│   │   │   ├── visualizer.py              # Telemetry visualization
 │   │   ├── ... other files ...
-│── config/                      # Drone configuration and parameters
-│── simulations/                 # Files for Gazebo simulation
+|   │── ros_gz      
 │── README.md                    # Project documentation
-│── requirements.txt              # Python dependencies
 ```
 
 ## Prerequisites & Installation Guide
