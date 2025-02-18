@@ -207,7 +207,7 @@ self.bologna_image_path = "/home/martina/drone/src/px4_offboard/scripts/Bologna.
 To ensure the script correctly locates the image, modify this path to match the actual location of **Bologna.jpg** on your system. 
 
 ## Final Step: Launching the Simulation
-Once you have copleted all the passages, you can launch the simulation running:
+Once you have completed all the passages, you can launch the simulation running:
 ```bash
 cd drone
 colcon build
