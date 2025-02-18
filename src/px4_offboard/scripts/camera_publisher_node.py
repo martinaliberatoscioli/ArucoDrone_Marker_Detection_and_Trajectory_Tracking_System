@@ -1,3 +1,5 @@
+import os
+os.environ["QT_QPA_PLATFORM"] = "xcb"
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
@@ -9,8 +11,8 @@ class CameraPublisherNode(Node):
         super().__init__('camera_publisher_node')
         self.bridge = CvBridge()
 
-        # Crea un Publisher normale per pubblicare immagini
-        self.image_pub = self.create_publisher(Image, "/rgbd_camera/image_raw", 10)
+        # Crea un Publisher per pubblicare immagini processate
+        self.image_pub = self.create_publisher(Image, "/processed_camera/image", 10)
 
         # Crea un Subscriber per ricevere immagini
         self.subscription = self.create_subscription(
@@ -19,6 +21,10 @@ class CameraPublisherNode(Node):
             self.image_callback,
             10
         )
+
+        # Timer per pubblicare immagini periodicamente (10 Hz)
+        self.timer = self.create_timer(0.1, self.publish_image)
+        self.latest_frame = None  # Memorizza l'ultima immagine ricevuta
 
     def image_callback(self, msg):
         try:
@@ -29,14 +35,17 @@ class CameraPublisherNode(Node):
             cv2.imshow("Camera Feed", frame)
             cv2.waitKey(1)
 
-            # Converti l'immagine OpenCV in un messaggio ROS Image
-            img_msg = self.bridge.cv2_to_imgmsg(frame, encoding="bgr8")
-
-            # Pubblica l'immagine
-            self.image_pub.publish(img_msg)
+            # Salva l'ultima immagine ricevuta
+            self.latest_frame = frame
 
         except Exception as e:
             self.get_logger().error(f"Errore nella conversione dell'immagine: {e}")
+
+    def publish_image(self):
+        """Pubblica l'ultima immagine ricevuta periodicamente."""
+        if self.latest_frame is not None:
+            img_msg = self.bridge.cv2_to_imgmsg(self.latest_frame, encoding="bgr8")
+            self.image_pub.publish(img_msg)
 
 def main(args=None):
     rclpy.init(args=args)
