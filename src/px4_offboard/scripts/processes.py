@@ -12,13 +12,13 @@ commands = [
     "cd ~/PX4-Autopilot && PX4_GZ_WORLD=aruco make px4_sitl gz_x500_mono_cam",
 
     # Avvia il ROS-Gazebo Bridge
-    "ros2 run ros_gz_bridge parameter_bridge /rgbd_camera/image@sensor_msgs/msg/Image@gz.msgs.Image",
+    #"ros2 run ros_gz_bridge parameter_bridge /rgbd_camera/image@sensor_msgs/msg/Image@gz.msgs.Image",
 
     # Avvia il nodo di detection
-    "ros2 run px4_offboard detection",
+    #"ros2 run px4_offboard detection",
 
     # Avvia il nodo della camera
-    "ros2 run px4_offboard camera_publisher_node",
+    #"ros2 run px4_offboard camera_publisher_node",
 
    # Avvia il nodo di controllo del drone
     "ros2 run px4_offboard offboard",
