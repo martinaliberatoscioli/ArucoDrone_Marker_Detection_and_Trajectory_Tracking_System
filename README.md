@@ -35,7 +35,7 @@ you_local_proj_ws/
 PX4 is the flight control system required for the drone simulation.
 
 ```bash
-git clone https://github.com/PX4/PX4-Autopilot.git --recursive -b release/1.14
+git clone https://github.com/PX4/PX4-Autopilot.git --recursive
 ```
 
 Now, install the required dependencies:
