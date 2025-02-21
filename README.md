@@ -12,7 +12,7 @@
 ## Project Structure
 
 ```
-you_local_proj_ws/
+ros_ws/
 │── src/
 │   │── px4_msgs                     # PX4 ROS2 Messages (to clone)
 │   │── ros_gz                       # ROS2 pkgs (to clone)
@@ -151,7 +151,7 @@ pip3 install matplotlib pandas opencv-python
 Create and configure a ROS2 workspace:
 
 ```bash
-cd ~/your_local_proj_ws/src
+cd ~/ros_ws/src
 ```
 Now, clone in your local workspace the required **ROS2 packages**
 
@@ -166,7 +166,7 @@ git clone https://github.com/PX4/px4_msgs.git
 
 Then, build the workspace:
 ```bash
-cd ~/your_local_proj_ws
+cd ~/ros_ws
 colcon build --symlink-install
 source install/setup.bash
 ```
@@ -199,22 +199,25 @@ This project is distributed under the MIT License. See the LICENSE file for more
 
 ## **Setup Instructions**  
 
-### **1 Move Rrquired Models**  
+### **1 Move Required Models**  
 
 Before launching the simulation, the necessary models must be placed in the PX4 directories to ensure proper rendering of the ArUco marker and the modified drone model. Run the following commands:  
 
 ```bash
-cp -r ~/your_local_proj_ws/px4_offboard/resource/arucotag ~/PX4-Autopilot/Tools/simulation/gz/models/
-cp -r ~~/your_local_proj_ws/px4_offboard/resource/x500_mono_cam ~/PX4-Autopilot/Tools/simulation/gz/models/
-cp ~~/your_local_proj_ws/px4_offboard/resource/aruco.sdf ~/PX4-Autopilot/Tools/simulation/gz/worlds/
+cp -r ~/ros_ws/px4_offboard/resource/arucotag ~/PX4-Autopilot/Tools/simulation/gz/models/
+cp -r ~~/ros_ws/px4_offboard/resource/x500_mono_cam ~/PX4-Autopilot/Tools/simulation/gz/models/
+cp ~~/ros_ws/px4_offboard/resource/aruco.sdf ~/PX4-Autopilot/Tools/simulation/gz/worlds/
 ```
-### **2. Description of the required Files**  
+### **2. Description of the Resource Files**  
 
-The following files are essential for the correct setup of the simulation environment:  
+The **`resource/`** folder contains essential files required for the correct setup of the simulation environment and marker detection::  
 
 - **`arucotag`**: The 3D model of the **ArUco marker**, used for detection during the simulation.  
-- **`x500_mono_cam`**: A **modified drone model equipped with an integrated camera**, enabling real-time image capture for marker detection.  
-- **`aruco.sdf`**: The **simulation world file** containing the ArUco marker and defining its placement within the environment.  
+- **`x500_mono_cam`**: A **modified drone model equipped with a monocular camera**, to capture and process real-time images of the ArUco marker. 
+- **`aruco.sdf`**: The **simulation world file** containing the ArUco marker and defining its placement within the environment, including the position and environment of the ArUco marke.
+- **`detect_aruco.py`**: Script responsible for detecting ArUco markers from the drone’s camera feed and processing the image data.
+- **`generate_aruco.py`**: Generates ArUco marker patterns for use in the simulation environment.
+- **`visualize.rviz`**: Configuration file for Rviz, allowing real-time visualization of the drone’s position and detected markers.
 
 These files must be correctly placed in the designated PX4 directories to ensure proper functionality of the system.
 
@@ -232,7 +235,7 @@ To ensure the script correctly locates the image, modify this path to match the 
 ## Final Step: Launching the Simulation
 Once you have completed all the passages, you can launch the simulation running:
 ```bash
-cd drone
+cd ros_ws
 colcon build
 source install/setup.bash
 cd src
