@@ -159,7 +159,7 @@ git clone https://github.com/PX4/px4_msgs.git
 Then, build the workspace:
 ```bash
 cd ~/your_local_proj_ws
-colcon build
+colcon build --symlink-install
 source install/setup.bash
 ```
 
