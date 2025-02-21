@@ -204,9 +204,9 @@ This project is distributed under the MIT License. See the LICENSE file for more
 Before launching the simulation, the necessary models must be placed in the PX4 directories to ensure proper rendering of the ArUco marker and the modified drone model. Run the following commands:  
 
 ```bash
-cp -r ~/drone/src/px4_offboard/arucotag ~/PX4-Autopilot/Tools/simulation/gz/models/
-cp -r ~/drone/src/px4_offboard/x500_mono_cam ~/PX4-Autopilot/Tools/simulation/gz/models/
-cp ~/drone/src/px4_offboard/aruco.sdf ~/PX4-Autopilot/Tools/simulation/gz/worlds/
+cp -r ~/your_local_proj_ws/px4_offboard/resource/arucotag ~/PX4-Autopilot/Tools/simulation/gz/models/
+cp -r ~~/your_local_proj_ws/px4_offboard/resource/x500_mono_cam ~/PX4-Autopilot/Tools/simulation/gz/models/
+cp ~~/your_local_proj_ws/px4_offboard/resource/aruco.sdf ~/PX4-Autopilot/Tools/simulation/gz/worlds/
 ```
 ### **2. Description of the required Files**  
 
