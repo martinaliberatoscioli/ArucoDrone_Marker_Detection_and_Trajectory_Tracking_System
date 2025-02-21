@@ -41,6 +41,13 @@ you_local_proj_ws/
 
 ## Prerequisites & Installation Guide
 
+**Clone the Repository and Required Dependencies**
+In your ROS2 workspace clone this repository
+
+```bash
+git clone https://github.com/martinaliberatoscioli/drone
+```
+
 ### 1. Install PX4 Autopilot
 PX4 is the flight control system required for the drone simulation.
 
