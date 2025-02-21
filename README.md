@@ -12,9 +12,10 @@
 ## Project Structure
 
 ```
-drone/
+you_local_proj_ws/
 │── src/
-|    │── px4_msgs                     # PX4 ROS2 Messages
+|   │── px4_msgs                     # PX4 ROS2 Messages (to clone)
+|   │── ros_gz                       # ROS2 pkgs (to clone)
 │   ├── px4_offboard/
 │   │   ├── scripts/
 │   │   │   ├── detection.py               # ArUco marker detection
