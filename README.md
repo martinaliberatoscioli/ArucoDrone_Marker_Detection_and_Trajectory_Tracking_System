@@ -14,18 +14,28 @@
 ```
 you_local_proj_ws/
 │── src/
-|   │── px4_msgs                     # PX4 ROS2 Messages (to clone)
-|   │── ros_gz                       # ROS2 pkgs (to clone)
-│   ├── px4_offboard/
-│   │   ├── scripts/
-│   │   │   ├── detection.py               # ArUco marker detection
-│   │   │   ├── camera_publisher_node.py   # Publishes images from the drone camera
-│   │   │   ├── offboard.py                # Drone Offboard control
-│   │   │   ├── odometry_logger.py         # Logs and plots drone odometry
-│   │   │   ├── processes.py               # Automates launch of multiple ROS nodes
-│   │   │   ├── visualizer.py              # Visualization of telemetry data
-│   │   ├── ...
+│   │── px4_msgs                     # PX4 ROS2 Messages (to clone)
+│   │── ros_gz                       # ROS2 pkgs (to clone)
+│   │── px4_offboard/
+│   │   ├── scripts/                  # Python scripts for control and visualization
+│   │   │   ├── detection.py               # Detects ArUco markers in the camera feed
+│   │   │   ├── camera_publisher_node.py   # Publishes camera images as ROS2 topics
+│   │   │   ├── offboard.py                # Controls the drone in offboard mode
+│   │   │   ├── odometry_logger.py         # Logs and visualizes odometry data
+│   │   │   ├── processes.py               # Automates ROS node launches
+│   │   │   ├── visualizer.py              # Displays real-time telemetry and position
+│   │   ├── resource/                 # Resources like SDF models and visualizations
+│   │   │   ├── aruco.sdf                   # SDF world file with ArUco marker
+│   │   │   ├── detect_aruco.py             # Detects ArUco markers in Gazebo
+│   │   │   ├── generate_aruco.py           # Generates ArUco markers
+│   │   │   ├── visualize.rviz              # Rviz configuration for visualization
+│   │   │   ├── arucotag/                    # ArUco tag 3D model
+│   │   │   ├── x500_mono_cam/               # Drone model with a monocular camera
+│   │   ├── launch/
+│   │   │   ├── offboard_velocity_control.launch.py  # Launches the offboard node
 │── README.md                    # Project documentation
+│── LICENSE                       # Project license
+
 
 ```
 
