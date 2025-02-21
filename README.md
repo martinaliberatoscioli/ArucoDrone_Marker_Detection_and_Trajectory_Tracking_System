@@ -222,7 +222,7 @@ The script responsible for publishing the associated image when the **ArUco mark
 By default, the image path is set as:  
 
 ```python
-self.bologna_image_path = "/home/martina/drone/src/px4_offboard/scripts/Bologna.jpg"
+self.bologna_image_path = "/home/martina/ros_ws/src/px4_offboard/scripts/Bologna.jpg"
 ```
 To ensure the script correctly locates the image, modify this path to match the actual location of **Bologna.jpg** on your system. 
 
