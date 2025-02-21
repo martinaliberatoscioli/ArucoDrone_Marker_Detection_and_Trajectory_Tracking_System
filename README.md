@@ -133,18 +133,22 @@ pip3 install matplotlib pandas opencv-python
 Create and configure a ROS2 workspace:
 
 ```bash
-cd ~/drone/src
+cd ~/your_local_proj_ws/src
 ```
-
-Now, clone the required ROS2 packages:
+Now, clone in your local workspace the required **ROS2 packages**
 
 ```bash
-git clone https://github.com/PX4/px4_msgs.git -b release/1.14
+git clone https://github.com/gazebosim/ros_gz.git
+```
+and the required **px4_msgs**:
+
+```bash
+git clone https://github.com/PX4/px4_msgs.git
 ```
 
 Then, build the workspace:
 ```bash
-cd ~/drone
+cd ~/your_local_proj_ws
 colcon build
 source install/setup.bash
 ```
