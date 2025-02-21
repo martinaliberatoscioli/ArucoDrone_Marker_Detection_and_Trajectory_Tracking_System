@@ -191,12 +191,6 @@ A set of scripts has been implemented to manage the drone's approach and marker 
 
 The detection and control system is built using multiple ROS2 nodes, each handling a specific aspect of the drone’s operation, including camera image processing, trajectory tracking, and telemetry visualization.
 
-## Contributing
-If you wish to contribute, feel free to fork the repository and submit a pull request.
-
-## License
-This project is distributed under the MIT License. See the LICENSE file for more details.
-
 ## **Setup Instructions**  
 
 ### **1 Move Required Models**  
@@ -232,6 +226,54 @@ self.bologna_image_path = "/home/martina/drone/src/px4_offboard/scripts/Bologna.
 ```
 To ensure the script correctly locates the image, modify this path to match the actual location of **Bologna.jpg** on your system. 
 
+
+## Scripts Description
+
+### **1. visualizer.py**
+Visualizes drone telemetry and trajectory in real-time:
+- Subscribes to PX4 topics for **attitude**, **local position**, and **trajectory setpoints**.
+- Publishes visual markers for:
+  - `/px4_visualizer/vehicle_pose` (current drone position)
+  - `/px4_visualizer/vehicle_velocity` (velocity vector visualization)
+  - `/px4_visualizer/vehicle_path` (actual trajectory)
+  - `/px4_visualizer/setpoint_path` (desired trajectory)
+
+### **2. processes.py**
+Automates launching all necessary components:
+- Starts **Micro XRCE-DDS Agent** for PX4-ROS2 communication.
+- Launches **PX4 SITL** with **x500_mono_cam** drone model in **Ignition Gazebo**.
+- Runs **offboard control**, **odometry logging**, and optional **detection and camera nodes**.
+
+### **3. offboard.py**
+Controls the drone in **OFFBOARD mode**:
+- Arms the drone and switches to OFFBOARD mode.
+- Sends **position setpoints** to move the drone to a target location `(2.5, 2.0, -2.0)`.
+- Monitors position and keeps the drone stable upon reaching the target.
+- Uses **MAVLink commands** for arm/disarm and mode switching.
+
+### **4. odometry_logger.py**
+Logs and visualizes drone odometry data:
+- Subscribes to **odometry and vehicle status** topics.
+- Saves data to **CSV (`~/odometry_data.csv`)**.
+- Displays **real-time graphs** for:
+  - Position (X, Y, Z)
+  - Velocity (X, Y, Z)
+  - Orientation (quaternions)
+- Only records data when the drone is **armed**.
+
+### **5. detection.py**
+Detects **parallelepipeds and ArUco markers**:
+- Processes camera feed to find a **red parallelepiped** and **ArUco markers**.
+- If **marker ID 42** is detected, **publishes an image** (`Bologna.jpg`).
+- Publishes the **marker’s position** to `/aruco_pose`.
+
+### **6. camera_publisher_node.py**
+Manages the camera feed:
+- Receives images from `/rgbd_camera/image`.
+- Displays the feed in **real-time** using OpenCV.
+- Publishes processed images to `/processed_camera/image`.
+
+---
 ## Final Step: Launching the Simulation
 Once you have completed all the passages, you can launch the simulation running:
 ```bash
@@ -245,3 +287,8 @@ To see the associated image of the detected ArUco marker, open a new terminal an
 ```bash
 rqt
 ```
+## Contributing
+If you wish to contribute, feel free to fork the repository and submit a pull request.
+
+## License
+This project is distributed under the MIT License. See the LICENSE file for more details.
