@@ -193,7 +193,7 @@ The detection and control system is built using multiple ROS2 nodes, each handli
 
 ## **Setup Instructions**  
 
-### **1 Move Required Models**  
+### **1. Move Required Models**  
 
 Before launching the simulation, the necessary models must be placed in the PX4 directories to ensure proper rendering of the ArUco marker and the modified drone model. Run the following commands:  
 
