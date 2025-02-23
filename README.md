@@ -46,7 +46,7 @@ ros_ws/
 In your ROS2 workspace clone this repository
 
 ```bash
-git clone https://github.com/martinaliberatoscioli/drone
+git clone https://github.com/martinaliberatoscioli/ArucoDrone_Marker_Detection_and_Trajectory_Tracking_System
 ```
 
 ### 1. Install PX4 Autopilot
