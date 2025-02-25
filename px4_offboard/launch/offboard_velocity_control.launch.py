@@ -38,7 +38,7 @@ def generate_launch_description():
         Node(
             package='px4_offboard',
             executable='offboard',
-            name='offboard_control_takeoff_and_land',
+            name='offboard_control',
             output = 'screen'
         ),
 
