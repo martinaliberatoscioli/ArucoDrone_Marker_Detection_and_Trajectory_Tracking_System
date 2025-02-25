@@ -142,7 +142,7 @@ class OffboardControl(Node):
  
  
 def main(args=None) -> None:
-    print('🚀 Avvio nodo di controllo offboard...')
+    print('Avvio nodo di controllo offboard...')
     rclpy.init(args=args)
     offboard_control = OffboardControl()
     rclpy.spin(offboard_control)
