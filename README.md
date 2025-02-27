@@ -1,7 +1,7 @@
 # ArucoDrone: Marker Detection and Trajectory Tracking System
 
 ###### Contributors
-> [**Sofia Zavaroni**](https://github.com/sofiazavaroni)
+> **Sofia Zavaroni**
 > **Martina Liberatoscioli**
 
 
