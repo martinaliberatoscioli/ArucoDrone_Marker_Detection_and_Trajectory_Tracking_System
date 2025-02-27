@@ -1,5 +1,9 @@
 # ArucoDrone: Marker Detection and Trajectory Tracking System
 
+> **Martina Liberatoscioli**  
+> **Sofia Zavaroni**
+
+
 ## Overview
 
 **ArucoDrone** is a project developed for detecting **ArUco markers** using a drone controlled via **PX4** and **ROS2**. This project utilizes **Gazebo** simulator and computer vision tools to enable the drone to:
