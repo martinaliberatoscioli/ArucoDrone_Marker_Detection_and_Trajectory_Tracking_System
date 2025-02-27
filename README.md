@@ -1,7 +1,8 @@
 # ArucoDrone: Marker Detection and Trajectory Tracking System
 
-> **Sofia Zavaroni**
-> **Martina Liberatoscioli**  
+> *Sofia Zavaroni*
+> *Martina Liberatoscioli*
+ 
 
 
 ## Overview
