@@ -2,8 +2,8 @@
 
 ###### Contributors
 > [**Sofia Zavaroni**](https://github.com/sofiazavaroni)
-
 > **Martina Liberatoscioli**
+
 
 ## Overview
 
