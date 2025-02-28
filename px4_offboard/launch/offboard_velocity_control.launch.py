@@ -17,14 +17,6 @@ def generate_launch_description():
             output='screen'
         ),
 
-        LogInfo(msg='Avvio del nodo visualizer'),
-        Node(
-            package='px4_offboard',
-            namespace='px4_offboard',
-            executable='visualizer',
-            name='visualizer'
-        ),
-
         LogInfo(msg='Avvio del nodo processes'),
         Node(
             package='px4_offboard',
@@ -41,7 +33,6 @@ def generate_launch_description():
             name='offboard_control',
             output = 'screen'
         ),
-
     
         LogInfo(msg='Avvio del nodo di rilevamento ArUco Marker'),
         Node(
@@ -56,8 +47,7 @@ def generate_launch_description():
             package='px4_offboard',
             executable='camera_publisher_node',
             name='camera_publisher',
-            output='screen',
-            
+            output='screen', 
         ),
 
         LogInfo(msg='Avvio di RViz per la visualizzazione'),
