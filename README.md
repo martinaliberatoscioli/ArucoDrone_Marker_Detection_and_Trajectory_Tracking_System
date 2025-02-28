@@ -292,7 +292,18 @@ To see the associated image of the detected ArUco marker, open a new terminal an
 ```bash
 rqt
 ```
-## Results
+## Results: Simulation Confirmation
+
+The simulation results are successfully obtained, as the image below confirms that the detection and tracking systems are working as expected.
+
+![Experiment Results](DEMO/detection_result.png)
+
+1. **Object detection is functioning correctly**: The **ArUco** marker and the red parallelepiped are successfully identified.
+
+2. **Correct image display**: The correct image is shown when the marker ID is recognized.
+
+3. **Drone tracking accuracy**: The drone successfully tracks objects, confirming that the position estimation and detection algorithms are operating as expected.
+
 
 
 ## Contributing
