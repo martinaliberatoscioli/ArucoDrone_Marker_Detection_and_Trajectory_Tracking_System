@@ -292,17 +292,33 @@ To see the associated image of the detected ArUco marker, open a new terminal an
 ```bash
 rqt
 ```
+
 ## Results: Simulation Confirmation
 
+### ArUco marker detection
 The simulation results are successfully obtained, as the image below confirms that the detection and tracking systems are working as expected.
 
-![Experiment Results](DEMO/detection_result.png)
+![Experiment Results](DEMO/results_images/detection_result.png)
 
 1. **Object detection is functioning correctly**: The **ArUco** marker and the red parallelepiped are successfully identified.
 
 2. **Correct image display**: The correct image is shown when the marker ID is recognized.
 
 3. **Drone tracking accuracy**: The drone successfully tracks objects, confirming that the position estimation and detection algorithms are operating as expected.
+
+### Drone Odometry Analysis
+
+The following plots provide additional confirmation of the drone performances in terms of position, velocity, and orientation over time.
+
+![Odometry Results](DEMO/results_images/odometry_result.png)
+
+- **Position Over Time**: The first plot shows the evolution of the position of the drone in the X, Y, and Z axes. The results indicate a smooth ascent and stabilization, confirming correct waypoint tracking.
+
+- **Velocity Over Time**: The second plot illustrates the velocity components. An initial peak is observed, corresponding to the drone acceleration, followed by stabilization, which indicates a proper control response.
+
+- **Orientation (Quaternions) Over Time**: The third plot presents the quaternion values, representing the drone orientation. The data shows an initial adjustment phase before reaching a stable orientation.
+
+These results validate that the drone navigation system is functioning as expected, with smooth trajectory execution, controlled velocity adjustments, and stable orientation.
 
 
 
