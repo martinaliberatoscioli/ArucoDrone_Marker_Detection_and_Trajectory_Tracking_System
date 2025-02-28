@@ -30,12 +30,10 @@ setup(
     license='Apache License 2.0',
     entry_points={
         'console_scripts': [
-            'visualizer = px4_offboard.visualizer:main',
             'offboard = px4_offboard.offboard:main',
             'processes = px4_offboard.processes:main',
             'detection = px4_offboard.detection:main',
             'camera_publisher_node = px4_offboard.camera_publisher_node:main',
-            'velocity_control = px4_offboard.velocity_control:main',
             'odometry_logger = px4_offboard.odometry_logger:main',
         ],
     },
