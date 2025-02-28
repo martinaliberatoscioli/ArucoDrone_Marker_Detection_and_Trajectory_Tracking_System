@@ -293,7 +293,7 @@ To see the associated image of the detected ArUco marker, open a new terminal an
 rqt
 ```
 
-## Results: Simulation Confirmation
+## Results - Simulation Confirmation
 
 ### ArUco marker detection
 The simulation results are successfully obtained, as the image below confirms that the detection and tracking systems are working as expected.
